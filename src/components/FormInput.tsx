@@ -1,6 +1,6 @@
 import { FormControl, FormField, FormItem, FormMessage, } from '@/ui/form';
 import { Input } from '@/ui/input';
-import { UseFormReturn, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 type FormInputProps = {
     name: string,
