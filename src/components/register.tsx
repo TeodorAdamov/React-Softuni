@@ -1,31 +1,29 @@
 import { Button } from '@/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from '@/ui/form';
-import { Input } from '@/ui/input';
+import { FormLabel, } from '@/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
-
-import { User } from '../types/User'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase';
+import FormInput from './FormInput';
 
 
 const formSchema = z.object({
-    email: z.string().email({
+    email: z.string().trim().email({
         message: 'Enter a valid email.'
     }),
-    password: z.string().min(6, {
+    password: z.string().trim().min(6, {
         message: 'Password must be at least 6 characters.'
     }),
-    repass: z.string().min(6, {
-        message: "repass //TODO"
+    repass: z.string().trim().min(6, {
+        message: 'Re-password must be at least 6 characters.'
     })
+}).refine((data) => data.password === data.repass, {
+    message: "Passwords don't match!",
+    path: ['repass']
 })
 
 const Register = () => {
-
-    const [user, setUser] = useState<User>({} as User)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -38,55 +36,24 @@ const Register = () => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
 
-        setUser(values)
         createUserWithEmailAndPassword(auth, values.email, values.password)
-            .then(user => console.log(user))
-            .catch(err => console.log(err.message))
+            .then(user => console.log(user)) /// TODOO SET USER IN CONTEXT 
+            .catch(err => {
+                const error = err.message == 'Firebase: Error (auth/email-already-in-use).' ? 'Email is already in use ' : 'Register Error'
+                form.setError('email', { type: 'manual', message: error });
+            })
     }
 
     return (
-        <Form {...form}>
+        <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-auto flex flex-col items-center gap-5 ">
                 <FormLabel>Register</FormLabel>
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input placeholder="username" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input placeholder="password" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="repass"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input placeholder="repass" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                <FormInput name='email' type='text' />
+                <FormInput name='password' type='password' />
+                <FormInput name='repass' type='password' />
                 <Button className='' type="submit">Register</Button>
             </form>
-        </Form>
+        </FormProvider>
     )
 }
 
