@@ -16,6 +16,9 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      display: ['Lato', 'sans-serif'],
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
