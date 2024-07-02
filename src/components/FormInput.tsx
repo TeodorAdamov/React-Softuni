@@ -16,7 +16,7 @@ const FormInput = ({ name, type }: FormInputProps) => {
             render={({ field }) => (
                 <FormItem>
                     <FormControl>
-                        <Input type={type} placeholder="email" {...field} />
+                        <Input type={type} placeholder={name} {...field} />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
