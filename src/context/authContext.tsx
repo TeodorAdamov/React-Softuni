@@ -9,15 +9,15 @@ interface AuthContextType {
     logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-const useAuth = (): AuthContextType => {
-    const context = useContext(AuthContext);
-    if (context === undefined) {
-        throw new Error('Context error')
-    }
-    return context
+const defaultContextValues: AuthContextType = {
+    user: null,
+    register: () => { },
+    logout: () => { }
 }
+
+const AuthContext = createContext<AuthContextType>(defaultContextValues)
+
+const useAuth = () => useContext(AuthContext)
 
 interface AuthProviderProps {
     children: ReactNode;
