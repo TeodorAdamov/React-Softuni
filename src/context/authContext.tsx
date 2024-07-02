@@ -15,9 +15,9 @@ const defaultContextValues: AuthContextType = {
     logout: () => { }
 }
 
-const AuthContext = createContext<AuthContextType>(defaultContextValues)
+const AuthContext = createContext<AuthContextType>(defaultContextValues);
 
-const useAuth = () => useContext(AuthContext)
+const useAuth = () => useContext(AuthContext);
 
 interface AuthProviderProps {
     children: ReactNode;
@@ -28,9 +28,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
     useEffect(() => {
         const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
-            setUser(user)
+            setUser(user);
         })
-        return () => unsubscribe()
+        return () => unsubscribe();
     }, []);
 
     const register = (email: string, password: string, displayName: string) => {
@@ -41,7 +41,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
                 setUser({ ...userData, displayName });
             }).catch((err) => {
                 throw err
-            })
+            });
     };
 
     const logout = async () => {
@@ -52,7 +52,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         user,
         register,
         logout
-    }
+    };
 
     return (
         <AuthContext.Provider value={values}>
