@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { useAuth } from '@/context/authContext'
-
+import NavigationMenuDropdown from './NavigationMenuDropdown'
 
 const Header = () => {
     const { user } = useAuth()
@@ -13,18 +13,15 @@ const Header = () => {
                 </Link>
             </div>
             <nav className='flex justify-center items-center'>
-                <ul className='flex gap-7 text-[#F0DC91]'>
-                    <li >
+                <ul className='flex gap-7 text-[#F0DC91] items-center'>
+                    <li>
                         <Link to='/products'>Products</Link>
                     </li>
 
                     {user?.email ? (
                         <>
                             <li>
-                                <p>Welcome {user.displayName}</p>
-                            </li>
-                            <li>
-                                <Link to='/logout'>Logout</Link>
+                                <NavigationMenuDropdown username={user.displayName} />
                             </li>
                         </>
                     ) : (
