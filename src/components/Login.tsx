@@ -34,6 +34,7 @@ const Login = () => {
         try {
             await login(values.email, values.password)
         } catch (err: unknown) {
+            form.resetField('password');
             if (err instanceof FirebaseError) {
                 const error = err.message == 'Firebase: Error (auth/invalid-credential).' ? 'Email or password is incorrect' : 'Login Error'
                 form.setError('email', { type: 'manual', message: error });
