@@ -5,6 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import FormInput from './FormInput';
 import { useAuth } from '@/context/authContext';
+import { FirebaseError } from 'firebase/app';
 
 
 
@@ -37,12 +38,12 @@ const Register = () => {
         }
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
 
         try {
-            register(values.email, values.password, values.displayName)
+            await register(values.email, values.password, values.displayName);
         } catch (err: unknown) {
-            if (err instanceof Error) {
+            if (err instanceof FirebaseError) {
                 const error = err.message == 'Firebase: Error (auth/email-already-in-use).' ? 'Email is already in use!' : 'Register Error'
                 form.setError('email', { type: 'manual', message: error });
             }
