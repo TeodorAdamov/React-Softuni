@@ -17,9 +17,7 @@ const formSchema = z.object({
     password: z.string().trim().min(6, {
         message: 'Password must be at least 6 characters.'
     }),
-    repass: z.string().trim().min(6, {
-        message: 'Re-password must be at least 6 characters.'
-    })
+    repass: z.string().trim()
 }).refine((data) => data.password === data.repass, {
     message: "Passwords don't match!",
     path: ['repass']
@@ -43,6 +41,8 @@ const Register = () => {
         try {
             await register(values.email, values.password, values.displayName);
         } catch (err: unknown) {
+            form.resetField('password');
+            form.resetField('repass');
             if (err instanceof FirebaseError) {
                 const error = err.message == 'Firebase: Error (auth/email-already-in-use).' ? 'Email is already in use!' : 'Register Error'
                 form.setError('email', { type: 'manual', message: error });
@@ -51,16 +51,18 @@ const Register = () => {
     }
 
     return (
-        <FormProvider {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-auto flex flex-col items-center gap-5 ">
-                <FormLabel>Register</FormLabel>
-                <FormInput name='email' type='text' />
-                <FormInput name='displayName' type='text' />
-                <FormInput name='password' type='password' />
-                <FormInput name='repass' type='password' />
-                <Button className='' type="submit">Register</Button>
-            </form>
-        </FormProvider>
+        <div className='formContainer'>
+            <FormProvider {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 ">
+                    <FormLabel>Register</FormLabel>
+                    <FormInput name='email' type='text' />
+                    <FormInput name='displayName' type='text' />
+                    <FormInput name='password' type='password' />
+                    <FormInput name='repass' type='password' />
+                    <Button className='' type="submit">Register</Button>
+                </form>
+            </FormProvider>
+        </div>
     )
 }
 
