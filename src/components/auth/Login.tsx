@@ -3,7 +3,7 @@ import { FormLabel, } from '@/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import FormInput from './FormInput';
+import FormInput from '../common/FormInput';
 import { useAuth } from '@/context/authContext';
 import { FirebaseError } from 'firebase/app';
 
@@ -46,8 +46,8 @@ const Login = () => {
         <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-auto flex flex-col items-center gap-5 ">
                 <FormLabel>Login</FormLabel>
-                <FormInput name='email' type='text' />
-                <FormInput name='password' type='password' />
+                <FormInput name='email' type='text' placeholder='Login Name' />
+                <FormInput name='password' type='password' placeholder='Password' />
                 <Button className='' type="submit">Login</Button>
             </form>
         </FormProvider>

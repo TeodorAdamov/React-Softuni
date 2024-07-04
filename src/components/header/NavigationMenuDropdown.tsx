@@ -1,11 +1,9 @@
 
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle, } from "@/ui/navigation-menu"
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger, } from "@/ui/navigation-menu"
 import { Link } from "react-router-dom";
 
 
 const NavigationMenuDropdown = (props: any) => {
-    console.log(props);
-
     return (
         <NavigationMenu>
             <NavigationMenuList>

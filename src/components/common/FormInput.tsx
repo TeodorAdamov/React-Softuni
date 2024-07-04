@@ -1,13 +1,15 @@
 import { FormControl, FormField, FormItem, FormMessage, } from '@/ui/form';
 import { Input } from '@/ui/input';
+
 import { useFormContext } from 'react-hook-form';
 
 type FormInputProps = {
     name: string,
     type: string,
+    placeholder: string,
 }
 
-const FormInput = ({ name, type }: FormInputProps) => {
+const FormInput = ({ name, type, placeholder }: FormInputProps) => {
     const { control } = useFormContext()
     return (
         <FormField
@@ -16,7 +18,7 @@ const FormInput = ({ name, type }: FormInputProps) => {
             render={({ field }) => (
                 <FormItem>
                     <FormControl>
-                        <Input type={type} placeholder={name} {...field} />
+                        <Input {...field} name={name} type={type} placeholder={placeholder} />
                     </FormControl>
                     <FormMessage />
                 </FormItem>

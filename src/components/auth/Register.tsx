@@ -3,9 +3,10 @@ import { FormLabel, } from '@/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import FormInput from './FormInput';
+import FormInput from '../common/FormInput';
 import { useAuth } from '@/context/authContext';
 import { FirebaseError } from 'firebase/app';
+import { Input } from '@/ui/input';
 
 
 
@@ -55,10 +56,10 @@ const Register = () => {
             <FormProvider {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 ">
                     <FormLabel>Register</FormLabel>
-                    <FormInput name='email' type='text' />
-                    <FormInput name='displayName' type='text' />
-                    <FormInput name='password' type='password' />
-                    <FormInput name='repass' type='password' />
+                    <FormInput name='email' type='text' placeholder='Email' />
+                    <FormInput name='displayName' type='text' placeholder='Display Name' />
+                    <FormInput name='password' type='password' placeholder='Password' />
+                    <FormInput name='repass' type='password' placeholder='Repeat Password' />
                     <Button className='' type="submit">Register</Button>
                 </form>
             </FormProvider>

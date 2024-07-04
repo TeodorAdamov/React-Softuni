@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+import logo from '../../assets/logo.png'
 import { useAuth } from '@/context/authContext'
 import NavigationMenuDropdown from './NavigationMenuDropdown'
 
@@ -20,6 +20,9 @@ const Header = () => {
 
                     {user?.email ? (
                         <>
+                            <li>
+                                <Link to='/sell'>Sell product</Link>
+                            </li>
                             <li>
                                 <NavigationMenuDropdown username={user.displayName} />
                             </li>

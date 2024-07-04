@@ -2,11 +2,12 @@ import { Route, Routes } from "react-router-dom"
 import "./global.css"
 import Layout from "./components/layouts/Layout"
 import Home from "./components/Home"
-import Register from "./components/Register"
-import Login from "./components/Login"
+import Register from "./components/auth/Register"
+import Login from "./components//auth/Login"
 import { AuthProvider } from "./context/authContext"
 import Products from "./components/Products"
-import Logout from "./components/Logout"
+import Logout from "./components/auth/Logout"
+import SellForm from "./components/SellProducts/SellForm"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
+                    <Route path="/sell" element={<SellForm />}></Route>
                 </Route>
             </Routes>
         </AuthProvider>
