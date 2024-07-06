@@ -10,12 +10,12 @@ const NavigationMenuDropdown = (props: any) => {
                 <NavigationMenuItem>
                     <NavigationMenuTrigger className="bg-slate-800">{props.username}</NavigationMenuTrigger>
                     <NavigationMenuContent className="bg-slate-800 text-[#F0DC91] rounded-b-sm">
-                        <ul className="flex flex-col justify-center items-center p-4 gap-2">
+                        <ul className="flex flex-col justify-center p-4 gap-2">
                             <li>
-                                <Link to='/profile'>Profile</Link>
+                                <Link to='/profile'>Профил</Link>
                             </li>
                             <li>
-                                <Link to='/logout'>Logout</Link>
+                                <Link to='/logout'>Изход</Link>
                             </li>
                         </ul>
                     </NavigationMenuContent>
