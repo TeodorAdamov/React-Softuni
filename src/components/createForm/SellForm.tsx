@@ -14,13 +14,16 @@ import FormTextarea from "./FormTextarea"
 import FormContacts from "./FormContacts"
 import { useAuth } from "@/context/authContext"
 import { isUserDefined } from "@/utils/typeGuards"
+import { addDoc, collection, doc, setDoc } from "firebase/firestore"
+import { firestore } from "../../firebase"
 
 
 const formSchema = z.object({
     product: z.string().trim(),
     category: z.string().trim(),
     description: z.string().trim(),
-    phoneNumber: z.string().trim()
+    phoneNumber: z.string().trim(),
+    email: z.string().trim()
 })
 
 const SellForm = () => {
@@ -32,7 +35,8 @@ const SellForm = () => {
             product: '',
             category: '',
             description: '',
-            phoneNumber: ''
+            phoneNumber: '',
+            email: '',
         }
     });
 
@@ -40,8 +44,15 @@ const SellForm = () => {
         setImages(img)
     }
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
         console.log(values);
+        console.log(images)
+        // await addDoc(collection(firestore, 'products'), {
+        //     values
+        // })
+        // await setDoc(doc(firestore, 'products'), {
+        //     values
+        // })
     }
 
     return (
@@ -56,7 +67,7 @@ const SellForm = () => {
                     </div>
                     <ImageUpload imageHandler={imageHandler} />
                     <FormTextarea name='description' />
-                    {isUserDefined(user) && <FormContacts email={user.email!} displayName={user.displayName!} />}
+                    <FormContacts />
                     <Button type="submit">Добави обява</Button>
                 </form>
             </FormProvider>

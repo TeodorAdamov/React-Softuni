@@ -9,11 +9,9 @@ type FormInputProps = {
     type: string,
     placeholder?: string,
     className?: string,
-    disabled?: boolean
-    value?: string
 }
 
-const FormInput = ({ name, type, placeholder, className, disabled, value }: FormInputProps) => {
+const FormInput = ({ name, type, placeholder, className }: FormInputProps) => {
     const { control } = useFormContext()
 
 
@@ -29,8 +27,6 @@ const FormInput = ({ name, type, placeholder, className, disabled, value }: Form
                             name={name}
                             type={type}
                             placeholder={placeholder}
-                            disabled={disabled}
-                            value={value}
                             className={cn('p-6 text-lg bg-slate-200', className)} />
                     </FormControl>
                     <FormMessage />
