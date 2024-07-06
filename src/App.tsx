@@ -7,7 +7,7 @@ import Login from "./components//auth/Login"
 import { AuthProvider } from "./context/authContext"
 import Products from "./components/Products"
 import Logout from "./components/auth/Logout"
-import SellForm from "./components/SellProducts/SellForm"
+import SellForm from "./components/createForm/SellForm"
 
 function App() {
 
