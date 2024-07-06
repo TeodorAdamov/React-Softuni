@@ -15,13 +15,13 @@ const Header = () => {
             <nav className='flex justify-center items-center'>
                 <ul className='flex gap-7 text-[#F0DC91] items-center'>
                     <li>
-                        <Link to='/products'>Products</Link>
+                        <Link to='/products'>Всички обяви</Link>
                     </li>
 
                     {user?.email ? (
                         <>
                             <li>
-                                <Link to='/sell'>Sell product</Link>
+                                <Link to='/sell'>Добави обява</Link>
                             </li>
                             <li>
                                 <NavigationMenuDropdown username={user.displayName} />
@@ -30,10 +30,10 @@ const Header = () => {
                     ) : (
                         <>
                             <li>
-                                <Link to='/register'>Register</Link>
+                                <Link to='/register'>Регистрация</Link>
                             </li>
                             <li>
-                                <Link to='/login'>Login</Link>
+                                <Link to='/login'>Вход</Link>
                             </li>
                         </>
                     )}

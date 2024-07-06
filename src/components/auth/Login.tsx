@@ -11,10 +11,10 @@ import { FirebaseError } from 'firebase/app';
 
 const formSchema = z.object({
     email: z.string().trim().email({
-        message: 'Enter a valid email.'
+        message: 'Въведи валиден имейл.'
     }),
     password: z.string().trim().min(6, {
-        message: 'Password must be at least 6 characters.'
+        message: 'Паролата трябва да бъде най - малко 6 символа.'
     })
 })
 
@@ -36,7 +36,7 @@ const Login = () => {
         } catch (err: unknown) {
             form.resetField('password');
             if (err instanceof FirebaseError) {
-                const error = err.message == 'Firebase: Error (auth/invalid-credential).' ? 'Email or password is incorrect' : 'Login Error'
+                const error = err.message == 'Firebase: Error (auth/invalid-credential).' ? 'Грешен имейл или парола.' : 'Грешка'
                 form.setError('email', { type: 'manual', message: error });
             }
         }
@@ -45,10 +45,10 @@ const Login = () => {
     return (
         <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-auto flex flex-col items-center gap-5 ">
-                <FormLabel>Login</FormLabel>
-                <FormInput name='email' type='text' placeholder='Login Name' />
-                <FormInput name='password' type='password' placeholder='Password' />
-                <Button className='' type="submit">Login</Button>
+                <FormLabel className='text-3xl'>Вход</FormLabel>
+                <FormInput name='email' type='text' placeholder='Имейл' />
+                <FormInput name='password' type='password' placeholder='Парола' />
+                <Button className='' type="submit">Вход</Button>
             </form>
         </FormProvider>
     )

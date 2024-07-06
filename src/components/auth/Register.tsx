@@ -12,15 +12,15 @@ import { Input } from '@/ui/input';
 
 const formSchema = z.object({
     email: z.string().trim().email({
-        message: 'Enter a valid email.'
+        message: 'Въведи валиден имейл.'
     }),
     displayName: z.string({ message: 'Enter display name' }).trim(),
     password: z.string().trim().min(6, {
-        message: 'Password must be at least 6 characters.'
+        message: 'Паролата трябва да бъде най - малко 6 символа.'
     }),
     repass: z.string().trim()
 }).refine((data) => data.password === data.repass, {
-    message: "Passwords don't match!",
+    message: "Паролите не съвпадат",
     path: ['repass']
 })
 
@@ -45,7 +45,7 @@ const Register = () => {
             form.resetField('password');
             form.resetField('repass');
             if (err instanceof FirebaseError) {
-                const error = err.message == 'Firebase: Error (auth/email-already-in-use).' ? 'Email is already in use!' : 'Register Error'
+                const error = err.message == 'Firebase: Error (auth/email-already-in-use).' ? 'Имейл адресът е зает!' : 'Грешка'
                 form.setError('email', { type: 'manual', message: error });
             }
         }
@@ -55,12 +55,12 @@ const Register = () => {
         <div className='formContainer'>
             <FormProvider {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 ">
-                    <FormLabel>Register</FormLabel>
-                    <FormInput name='email' type='text' placeholder='Email' />
-                    <FormInput name='displayName' type='text' placeholder='Display Name' />
-                    <FormInput name='password' type='password' placeholder='Password' />
-                    <FormInput name='repass' type='password' placeholder='Repeat Password' />
-                    <Button className='' type="submit">Register</Button>
+                    <FormLabel className='text-3xl'>Регистрация</FormLabel>
+                    <FormInput name='email' type='text' placeholder='Имейл' />
+                    <FormInput name='displayName' type='text' placeholder='Потребителско име' />
+                    <FormInput name='password' type='password' placeholder='Парола' />
+                    <FormInput name='repass' type='password' placeholder='Повтори паролата' />
+                    <Button className='' type="submit">Регистрация</Button>
                 </form>
             </FormProvider>
         </div>
