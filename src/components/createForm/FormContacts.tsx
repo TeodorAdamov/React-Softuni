@@ -10,7 +10,7 @@ const FormContacts = () => {
             </div>
             <div>
                 <p className="text-sm">Имейл</p>
-                <FormInput name='email' type='text' placeholder="Имейл" className="max-w-[500px] bg-white" />
+                <FormInput name='email' type='email' placeholder="Имейл" className="max-w-[500px] bg-white" />
             </div>
             <div>
                 <p className="text-sm">Телефон за връзка</p>
