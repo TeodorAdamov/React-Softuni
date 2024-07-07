@@ -29,7 +29,7 @@ const FormInput = ({ name, type, placeholder, className }: FormInputProps) => {
                             placeholder={placeholder}
                             className={cn('p-6 text-lg bg-slate-200', className)} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className='text-base'/>
                 </FormItem>
             )}
         />

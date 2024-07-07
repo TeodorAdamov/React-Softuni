@@ -25,7 +25,7 @@ const FormTextarea = ({ name }: FormInputProps) => {
                             placeholder="Опишете продукта който продавате"
                             className="bg-slate-200 text-xl resize-none min-h-60 placeholder:text-2xl placeholder:text-center placeholder:focus:text-transparent placeholder:text-slate-800" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className='text-base'/>
                 </FormItem>
             )}
         />

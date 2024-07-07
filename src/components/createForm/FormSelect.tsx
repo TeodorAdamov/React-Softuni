@@ -44,7 +44,7 @@ const FormSelect = ({ placeholder, name }: selectInputProps) => {
                             </SelectContent>
                         </Select>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className='text-base'/>
                 </FormItem>
             )}
         />
