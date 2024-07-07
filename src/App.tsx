@@ -5,7 +5,7 @@ import Home from "./components/Home"
 import Register from "./components/auth/Register"
 import Login from "./components//auth/Login"
 import { AuthProvider } from "./context/authContext"
-import Products from "./components/Products"
+import Products from "./components/products/Products"
 import Logout from "./components/auth/Logout"
 import SellForm from "./components/createForm/SellForm"
 
