@@ -76,6 +76,10 @@
   }
 }
 
+body {
+  background-color: rgb(245, 245, 245);
+}
+
 img {
   display: block;
   width: 100%;
