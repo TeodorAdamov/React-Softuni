@@ -55,7 +55,7 @@ const ImageUpload = ({ imageHandler = () => { } }: ImageHandlerProps) => {
     })
 
     return (
-        <div className='bg-slate-200 min-h-96 p-3 flex items-center flex-col  text-slate-800 rounded-md' {...getRootProps()}>
+        <div className='bg-slate-200 min-h-96 p-3 flex items-center flex-col  text-slate-800 rounded-md shadow-inner' {...getRootProps()}>
             <input {...getInputProps()} />
             <p className='pb-4 text-2xl'>Добавете снимки</p>
             <p className='text-2xl'>Позволените формати са jpeg и png и максималният брой на снимките е 4</p>

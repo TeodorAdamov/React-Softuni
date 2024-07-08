@@ -2,7 +2,7 @@ import FormInput from "../common/FormInput"
 
 const FormContacts = () => {
     return (
-        <div className="flex flex-col gap-3 bg-slate-200 rounded-md p-4">
+        <div className="flex flex-col gap-3 bg-slate-200 rounded-md p-4 shadow-inner">
             <p className="pb-4 text-2xl text-slate-800 text-center">Контакти</p>
             <div>
                 <p className="text-sm">Име на продавача</p>
