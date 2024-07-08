@@ -22,9 +22,9 @@ import generateRandomString from "@/utils/randomStringGenerator"
 
 
 const formSchema = z.object({
-    product: z.string().trim().min(1, { message: 'Моля въведете име на обявата.' }),
+    product: z.string().trim().min(1, { message: 'Моля въведете име на обявата.' }).max(70, { message: 'Заглавието на обявата трябва да е под 70 символа' }),
     category: z.string().trim().min(1, { message: 'Моля изберете категория.' }),
-    description: z.string().trim().min(10, { message: 'Моля напишете описание на обявата.' }),
+    description: z.string().trim().min(10, { message: 'Описанието трябва да бъде минимум 10 символа.' }),
     phoneNumber: z.string().trim().min(1, { message: 'Моля въведете телефон за контакт.' }),
     email: z.string().trim().email({ message: 'Моля въведете имейл адрес.' }),
     displayName: z.string().trim().min(1, { message: 'Моля въведете вашето име.' }),
@@ -71,7 +71,7 @@ const SellForm = () => {
                     .then(async (images) => {
                         await addDoc(collection(firestore, 'products'), { ...values, images })
                         setLoading(false);
-                        navigate('/products')
+                        navigate('/products');
                     })
             })
     }
@@ -86,13 +86,13 @@ const SellForm = () => {
                     <FormProvider {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col flex-initial w-full max-w-[1000px] p-4 gap-6  text-slate-800">
                             <FormLabel className=" text-slate-800 text-2xl">Какво продаваш</FormLabel>
-                            <div className="flex flex-col gap-6 bg-slate-200 p-4">
+                            <div className="flex flex-col gap-6 bg-slate-200 p-4 rounded-md shadow-inner">
                                 <FormInput name='product' type='text' placeholder='Име на обявата' className='bg-white' />
                                 <FormSelect name='category' placeholder='Избери категория' />
                             </div>
                             <ImageUpload imageHandler={imageHandler} />
                             <FormTextarea name='description' />
-                            <div className=' bg-slate-200 p-4'>
+                            <div className=' bg-slate-200 p-4 shadow-inner'>
                                 <p className='text-center pb-4 text-slate-800 text-2xl'>Цена</p>
                                 <FormInput name='price' type='text' placeholder='Цена' className='bg-white max-w-[500px]' />
                             </div>
