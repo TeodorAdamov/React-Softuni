@@ -9,34 +9,27 @@ import {
 type PaginationProps = {
     startIndex: number;
     endIndex: number;
-    productsPerPage: number;
     productsLength: number;
-    startIndexHandler: (i: number) => void;
-    endIndexHandler: (i: number) => void;
+    handlePrevious: () => void;
+    handleNext: () => void;
 }
 
 const CardPagination = ({
     startIndex,
-    startIndexHandler,
-    endIndex, endIndexHandler,
-    productsPerPage,
+    handlePrevious,
+    endIndex,
+    handleNext,
     productsLength }: PaginationProps) => {
     return (
-        <Pagination className="self-end">
+        <Pagination>
             <PaginationContent>
                 <PaginationItem>
                     <PaginationPrevious className={startIndex === 0 ? 'pointer-events-none opacity-50' : ''}
-                        onClick={() => {
-                            startIndexHandler(startIndex - productsPerPage);
-                            endIndexHandler(endIndex - productsPerPage);
-                        }} />
+                        onClick={handlePrevious} />
                 </PaginationItem>
                 <PaginationItem>
                     <PaginationNext className={endIndex >= productsLength ? 'pointer-events-none opacity-50' : ''}
-                        onClick={() => {
-                            startIndexHandler(startIndex + productsPerPage);
-                            endIndexHandler(endIndex + productsPerPage);
-                        }} />
+                        onClick={handleNext} />
                 </PaginationItem>
             </PaginationContent>
         </Pagination>
