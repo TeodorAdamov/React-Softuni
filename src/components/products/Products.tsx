@@ -6,7 +6,7 @@ import { getAllItemsFromCollection } from "@/firebase"
 import CardPagination from "../common/CardPagination"
 import { useLocation, useNavigate, } from "react-router-dom"
 
-interface Product {
+export interface Product {
     id: string;
     images: string[];
     product: string;
@@ -20,7 +20,8 @@ interface Product {
 
 const Products = () => {
     const [products, setProducts] = useState<Product[]>([]);
-    const productsPerPage = 12
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+    const productsPerPage = 12;
     const location = useLocation();
     const navigate = useNavigate();
     const query = new URLSearchParams(location.search);
@@ -29,7 +30,7 @@ const Products = () => {
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
 
-    async function fetchProducts() {
+    const fetchProducts = async () => {
         try {
             const querySnapshot = await getDocs(getAllItemsFromCollection('products'));
 
@@ -39,6 +40,7 @@ const Products = () => {
                 return { ...data, id } as Product
             });
             setProducts(productsList);
+            setFilteredProducts(productsList)
 
         } catch (err) {
             console.log(err);
@@ -54,6 +56,10 @@ const Products = () => {
         navigate(`?${query.toString()}`, { replace: true })
     }, [currentPage]);
 
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [filteredProducts])
+
     const handlePrevious = () => {
         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
     }
@@ -62,18 +68,19 @@ const Products = () => {
         setCurrentPage((prevPage) => Math.min(prevPage + 1, Math.ceil(products.length / productsPerPage)));
     }
 
-
-
+    const filteredProductsHandler = (products: Product[]) => {
+        setFilteredProducts(products)
+    }
 
     return (
-        <div className="flex flex-col justify-center p-2 w-full items-center sm:items-center md:items-center xl:items-start md:px-44 xl:flex-row 2xl:max-w-[2000px]">
-            <aside className="max-w-72 w-full xl:mr-10">
-                <p className="text-center">Избери категория</p>
-            </aside>
+        <div className="flex flex-col p-2 w-full items-center sm:items-center md:items-center xl:items-start md:px-44 xl:flex-row 2xl:max-w-[2000px]">
+            <Aside products={products} filteredProductsHandler={filteredProductsHandler} />
+
             <div className="flex flex-col">
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
-                    {products.slice(startIndex, endIndex).map((p) => <ProductCard
+                    {filteredProducts.slice(startIndex, endIndex).map((p) => <ProductCard
                         key={p.id}
+                        id={p.id}
                         image={p.images[0]}
                         product={p.product}
                         price={p.price}
@@ -85,7 +92,7 @@ const Products = () => {
                         endIndex={endIndex}
                         handlePrevious={handlePrevious}
                         handleNext={handleNext}
-                        productsLength={products.length} />
+                        productsLength={filteredProducts.length} />
                 </div>
             </div>
         </div>
