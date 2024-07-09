@@ -52,18 +52,18 @@ const Register = () => {
     }
 
     return (
-        <div className='formContainer'>
-            <FormProvider {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 ">
+        <FormProvider {...form}>
+            <div>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 bg-slate-200 p-4 rounded-md shadow-inner">
                     <FormLabel className='text-3xl'>Регистрация</FormLabel>
-                    <FormInput name='email' type='text' placeholder='Имейл' />
-                    <FormInput name='displayName' type='text' placeholder='Потребителско име' />
-                    <FormInput name='password' type='password' placeholder='Парола' />
-                    <FormInput name='repass' type='password' placeholder='Повтори паролата' />
+                    <FormInput name='email' type='text' placeholder='Имейл' className='bg-white' />
+                    <FormInput name='displayName' type='text' placeholder='Потребителско име' className='bg-white' />
+                    <FormInput name='password' type='password' placeholder='Парола' className='bg-white' />
+                    <FormInput name='repass' type='password' placeholder='Повтори паролата' className='bg-white' />
                     <Button className='' type="submit">Регистрация</Button>
                 </form>
-            </FormProvider>
-        </div>
+            </div>
+        </FormProvider>
     )
 }
 
