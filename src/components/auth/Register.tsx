@@ -6,9 +6,6 @@ import { z } from 'zod'
 import FormInput from '../common/FormInput';
 import { useAuth } from '@/context/authContext';
 import { FirebaseError } from 'firebase/app';
-import { Input } from '@/ui/input';
-
-
 
 const formSchema = z.object({
     email: z.string().trim().email({
