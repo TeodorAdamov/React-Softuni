@@ -9,6 +9,7 @@ import Products from "./components/products/Products"
 import Logout from "./components/auth/Logout"
 import SellForm from "./components/createForm/SellForm"
 import ProductDetails from "./components/products/productDetails/ProductDetails"
+import ProductEdit from "./components/products/productEdit/ProductEdit"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path='/products' element={<Products />} />
                     <Route path='/products/:id' element={<ProductDetails />} />
+                    <Route path='/edit/:id' element={<ProductEdit />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
