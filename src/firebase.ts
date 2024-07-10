@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection } from "firebase/firestore";
+import { getFirestore, collection, doc } from "firebase/firestore";
 import { getStorage, ref } from "firebase/storage"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,6 +21,7 @@ const app = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(app);
 const firestore = getFirestore(app);
 const getAllItemsFromCollection = (collectionName: string) => collection(firestore, collectionName);
+const documentByIdRef = (id: string) => doc(firestore, 'products', id);
 const firebaseStorage = getStorage(app)
 const storageRef = (imageName: string) => ref(firebaseStorage, imageName);
 export {
@@ -28,5 +29,6 @@ export {
     firestore,
     firebaseStorage,
     storageRef,
-    getAllItemsFromCollection
+    getAllItemsFromCollection,
+    documentByIdRef
 }
