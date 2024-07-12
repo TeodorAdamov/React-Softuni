@@ -73,6 +73,9 @@ const SellForm = () => {
                         setLoading(false);
                         navigate('/products');
                     })
+            }).catch(error => {
+                console.log(error);
+                navigate('/login');
             })
     }
 
