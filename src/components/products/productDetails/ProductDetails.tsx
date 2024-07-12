@@ -11,6 +11,7 @@ import DetailsAside from "./DetailsAside"
 const ProductDetails = () => {
     const { id } = useParams();
     const [product, setProduct] = useState<Product | null>(null);
+    const [isEdited, setIsEdited] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const fetchProduct = async () => {
@@ -30,6 +31,10 @@ const ProductDetails = () => {
         }
     }
 
+    const handleIsEdited = () => {
+        setIsEdited(true);
+    }
+    
     const handleDelete = async (id: string) => {
         try {
             const docRef = documentByIdRef(id);
@@ -39,6 +44,13 @@ const ProductDetails = () => {
             console.log(err);
         }
     }
+
+    useEffect(() => {
+        if (isEdited) {
+            fetchProduct()
+            setIsEdited(false);
+        }
+    }, [isEdited])
 
     useEffect(() => {
         fetchProduct()
@@ -53,7 +65,7 @@ const ProductDetails = () => {
                         <p className="break-words">{product.description}</p>
                     </div>
                 </div>
-                <DetailsAside product={product} handleDelete={handleDelete} />
+                <DetailsAside product={product} handleDelete={handleDelete} handleIsEdited={handleIsEdited} />
             </div>
         )
     )
