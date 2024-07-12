@@ -24,7 +24,7 @@ const FormSelect = ({ placeholder, name }: selectInputProps) => {
             render={({ field }) => (
                 <FormItem>
                     <FormControl>
-                        <Select onValueChange={field.onChange}>
+                        <Select value={field.value} onValueChange={field.onChange}>
                             <SelectTrigger className="bg-white mb-3 max-w-[500px]">
                                 <SelectValue placeholder={placeholder} />
                             </SelectTrigger>
