@@ -18,7 +18,6 @@ import { z } from "zod"
 import { Product } from "../Products"
 import { setDoc } from "firebase/firestore"
 import { documentByIdRef } from "@/firebase"
-import { useNavigate } from "react-router-dom"
 
 const formSchema = z.object({
     product: z.string().trim().min(1, { message: 'Моля въведете име на обявата.' }).max(70, { message: 'Заглавието на обявата трябва да е под 70 символа' }),
@@ -44,7 +43,6 @@ type EditDialogProps = {
 
 const EditDialog = ({ product, handleIsEdited }: EditDialogProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {

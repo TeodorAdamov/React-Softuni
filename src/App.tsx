@@ -9,7 +9,6 @@ import Products from "./components/products/Products"
 import Logout from "./components/auth/Logout"
 import SellForm from "./components/createForm/SellForm"
 import ProductDetails from "./components/products/productDetails/ProductDetails"
-import ProductEdit from "./components/products/productEdit/ProductEdit"
 
 function App() {
 
