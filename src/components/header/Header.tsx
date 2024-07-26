@@ -24,7 +24,7 @@ const Header = () => {
                                 <Link to='/sell'>Добави обява</Link>
                             </li>
                             <li>
-                                <NavigationMenuDropdown username={user.displayName} />
+                                <NavigationMenuDropdown />
                             </li>
                         </>
                     ) : (
