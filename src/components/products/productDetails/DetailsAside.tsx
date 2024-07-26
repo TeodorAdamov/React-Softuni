@@ -3,6 +3,7 @@ import { Product } from "../Products"
 import ConfirmDialog from "@/components/common/AlertDialog";
 import { isUserDefined } from "@/utils/typeGuards";
 import EditDialog from "./EditDialog";
+import PopoverMessages from "./PopoverMessages";
 
 type DetailsAsideProps = {
     product: Product
@@ -17,7 +18,7 @@ const DetailsAside = ({ product, handleDelete, handleIsEdited }: DetailsAsidePro
             <div className="flex flex-col gap-5 bg-slate-200 p-4 rounded-md">
                 <h4 className="">{product.product}</h4>
                 <p className="text-2xl text-slate-800 font-bold">{product.price} лв.</p>
-                <button className="bg-slate-800 text-slate-200 p-2 rounded-md font-bold text-2xl">СЪОБЩЕНИЕ</button>
+                <PopoverMessages product={product}/>
             </div>
             <div className="flex flex-col gap-6 p-4 bg-slate-200 rounded-md">
                 <p className="text-base">Потребител</p>

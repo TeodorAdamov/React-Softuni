@@ -14,7 +14,7 @@ type ProductCardPropsType = {
 
 const ProductCard = ({ image, product, price, id }: ProductCardPropsType) => {
     return (
-        <Link to={id} >
+        <Link to={`/products/${id}`} >
             <Card className="max-w-[300px] max-h-96 h-full flex flex-col gap-4">
                 <CardHeader>
                     <img src={image} alt="" className="w-[350px] max-h-60 rounded-t-sm aspect-square" />

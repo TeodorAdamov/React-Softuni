@@ -32,7 +32,7 @@ const Products = () => {
 
     const fetchProducts = async () => {
         try {
-            const querySnapshot = await getDocs(getAllItemsFromCollection('products'));
+            const querySnapshot = await getDocs(getAllItemsFromCollection());
 
             const productsList: Product[] = querySnapshot.docs.map(doc => {
                 const id = doc.id;
