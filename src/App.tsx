@@ -9,6 +9,8 @@ import Products from "./components/products/Products"
 import Logout from "./components/auth/Logout"
 import SellForm from "./components/createForm/SellForm"
 import ProductDetails from "./components/products/productDetails/ProductDetails"
+import MyAds from "./components/currentUser/MyAds"
+import MyMessages from "./components/currentUser/MyMessages"
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path='/products' element={<Products />} />
                     <Route path='/products/:id' element={<ProductDetails />} />
+                    <Route path='/myads' element={<MyAds />} />
+                    <Route path='/messages' element={<MyMessages />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
