@@ -15,11 +15,13 @@ const DetailsAside = ({ product, handleDelete, handleIsEdited }: DetailsAsidePro
     const { user } = useAuth();
     return (
         <aside className="rounded-md flex-1 flex flex-col gap-5">
-            <div className="flex flex-col gap-5 bg-slate-200 p-4 rounded-md">
-                <h4 className="">{product.product}</h4>
-                <p className="text-2xl text-slate-800 font-bold">{product.price} лв.</p>
-                <PopoverMessages product={product}/>
-            </div>
+            {isUserDefined(user) && user.email !== product.email &&
+                <div className="flex flex-col gap-5 bg-slate-200 p-4 rounded-md">
+                    <h4 className="">{product.product}</h4>
+                    <p className="text-2xl text-slate-800 font-bold">{product.price} лв.</p>
+                    <PopoverMessages product={product} />
+                </div>
+            }
             <div className="flex flex-col gap-6 p-4 bg-slate-200 rounded-md">
                 <p className="text-base">Потребител</p>
                 <p className="text-2xl text-slate-800">{product.displayName}</p>
