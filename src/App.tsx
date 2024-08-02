@@ -11,6 +11,7 @@ import SellForm from "./components/createForm/SellForm"
 import ProductDetails from "./components/products/productDetails/ProductDetails"
 import MyAds from "./components/currentUser/MyAds"
 import MyMessages from "./components/currentUser/MyMessages"
+import Profile from "./components/currentUser/Profile"
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path='/products' element={<Products />} />
                     <Route path='/products/:id' element={<ProductDetails />} />
                     <Route path='/myads' element={<MyAds />} />
+                    <Route path='/profile' element={<Profile />} />
                     <Route path='/messages' element={<MyMessages />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />

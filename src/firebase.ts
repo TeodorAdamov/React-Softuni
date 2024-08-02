@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, doc, query, where, orderBy } from "firebase/firestore";
+import { getFirestore, collection, doc, query, where, orderBy, or } from "firebase/firestore";
 import { getStorage, ref } from "firebase/storage"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -30,9 +30,19 @@ const documentByIdRef = (id: string) => doc(firestore, 'products', id);
 const firebaseStorage = getStorage(app)
 const storageRef = (imageName: string) => ref(firebaseStorage, imageName);
 const specificItemsByEmail = (email: string) => query(collection(firestore, COLLECTIONS.PRODUCTS), where('email', '==', email));
-const getMessagesForChat = (adId: string) => query(collection(firestore, COLLECTIONS.MESSAGES),
+const getMessagesForChat = (user1: string, user2: string, adId: string) => query(collection(firestore, COLLECTIONS.MESSAGES),
     where('adId', '==', adId),
-    orderBy('timestamp', 'asc'))
+    where('sender', 'in', [user1, user2]),
+    where('receiver', 'in', [user1, user2]),
+    orderBy('timestamp', 'asc'));
+
+const getChatsForUser = (email: string) => query(collection(firestore, COLLECTIONS.MESSAGES),
+    or(
+        where('sender', '==', email),
+        where('receiver', '==', email),
+    ),
+    orderBy('timestamp', 'asc'));
+
 export {
     firebaseAuth,
     firestore,
@@ -41,5 +51,6 @@ export {
     getAllItemsFromCollection,
     documentByIdRef,
     specificItemsByEmail,
-    getMessagesForChat
+    getMessagesForChat,
+    getChatsForUser
 }

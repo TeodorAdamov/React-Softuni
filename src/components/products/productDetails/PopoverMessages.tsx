@@ -24,7 +24,9 @@ type Message = {
     receiver: string,
     sender: string,
     adId: string,
-    timestamp: Timestamp
+    timestamp: Timestamp,
+    adName: string,
+    chatCreator: string
 }
 
 const PopoverMessages = ({ product }: PopoverMessagesProps) => {
@@ -42,14 +44,17 @@ const PopoverMessages = ({ product }: PopoverMessagesProps) => {
     useEffect(() => {
         const getMessages = async () => {
             if (user?.email) {
-                const unsubscribe = onSnapshot(getMessagesForChat(product.id), (snapshot) => {
+                const user1 = product.email;
+                const user2 = user.email;
+                const adId = product.id;
+                const unsubscribe = onSnapshot(getMessagesForChat(user1, user2, adId), (snapshot) => {
                     const messages: Message[] = [];
                     snapshot.forEach(doc => messages.push(doc.data() as Message));
                     setChat(messages);
                 });
-
                 return () => unsubscribe();
             }
+
         }
         getMessages()
     }, [])
@@ -74,7 +79,9 @@ const PopoverMessages = ({ product }: PopoverMessagesProps) => {
             receiver: product.email,
             sender: user?.email,
             adId: product.id,
-            timestamp: Timestamp.now()
+            timestamp: Timestamp.now(),
+            adName: product.product,
+            chatCreator: product.displayName
         }
         await addDoc(collection(firestore, 'messages'), ms);
         setMessage('');
@@ -105,9 +112,13 @@ const PopoverMessages = ({ product }: PopoverMessagesProps) => {
                         <ul className="flex-1 flex flex-col gap-2">
                             {chat.map((m, i) =>
                                 <li
-                                    className={m.sender === user?.email ? 'self-end text-slate-800 bg-slate-200 px-3 py-1 rounded-xl' : ''}
-                                    key={i}
-                                >{m.message}
+                                    className={m.sender === user?.email ? 'self-end text-white bg-slate-800 px-3 py-1 rounded-xl break-words'
+                                        :
+                                        'text-slate-800 bg-slate-200 px-3 py-1 rounded-xl break-words self-start'}
+                                    key={i}>
+                                    <p className="break-words max-w-44">
+                                        {m.message}
+                                    </p>
                                 </li>)}
                         </ul>
                     </div>
