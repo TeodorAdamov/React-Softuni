@@ -27,9 +27,9 @@ const FormInput = ({ name, type, placeholder, className }: FormInputProps) => {
                             name={name}
                             type={type}
                             placeholder={placeholder}
-                            className={cn('p-6 text-lg bg-slate-200', className)} />
+                            className={cn('p-6 text-lg bg-slate-200 w-96', className)} />
                     </FormControl>
-                    <FormMessage className='text-base'/>
+                    <FormMessage className='text-sm'/>
                 </FormItem>
             )}
         />
