@@ -58,7 +58,7 @@ const ProductDetails = () => {
     return (
         product && (
             <div className="flex flex-col max-w-[1200px] gap-28 p-2 md:flex-row">
-                <div className="flex flex-col justify-center gap-5 max-w-[700px]">
+                <div className="flex flex-col justify-center gap-5 max-w-[700px] self-start">
                     <Gallery images={product.images} />
                     <div className="bg-slate-200 md-rounded p-4 rounded-md">
                         <p className="text-slate-800 text-3xl font-bold pb-8">Описание</p>
